@@ -54,15 +54,23 @@ keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available 
 
 keymap.set("n", "<Leader>fr", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
 
+
+keymap.set("n", "<Leader>i", ":MetalsOrganizeImports")
+
 keymap.set("n", "gD", function()
   vim.lsp.buf.definition()
 end)
 
+-- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 keymap.set("n", "K", function()
   vim.lsp.buf.hover()
 end)
 
 local map = keymap.set
+local opts = { noremap = true, silent = true, buffer = bufnr }
+
+-- map("n", "gf", "<cmd>Lspsaga lsp_finder<CR>", opts)
+
 map("n", "gi", function()
   vim.lsp.buf.implementation()
 end)
@@ -95,6 +103,8 @@ map("n", "<leader>f", function()
   vim.lsp.buf.formatting()
 end)
 
+
+-- map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
 map("n", "<leader>ca", function()
   vim.lsp.buf.code_action()
 end)
@@ -119,6 +129,8 @@ map("n", "<leader>aw", function()
 end)
 
 -- buffer diagnostics only
+-- keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
+-- keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
 map("n", "<leader>d", function()
   vim.diagnostic.setloclist()
 end)

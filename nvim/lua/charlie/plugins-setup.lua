@@ -57,12 +57,17 @@ return packer.startup(function(use)
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
 
   -- autocompletion
-  use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-vsnip")
   use("hrsh7th/vim-vsnip")
   use("hrsh7th/nvim-cmp") -- completion plugin
   use("hrsh7th/cmp-buffer") -- source for text in buffer
   use("hrsh7th/cmp-path") -- source for file system paths
+
+
+  -- lsp server stuff
+  use("hrsh7th/cmp-nvim-lsp")
+  use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
 
   -- snippets
   use("L3MON4D3/LuaSnip") -- snippet engine
@@ -75,6 +80,18 @@ return packer.startup(function(use)
       "mfussenegger/nvim-dap" 
     }
   })
+
+  -- treesitter configuration
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = function()
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+      ts_update()
+    end,
+  })
+
+  -- git
+  use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
 
 
   if packer_bootstrap then
