@@ -61,6 +61,9 @@ keymap.set("n", "gD", function()
   vim.lsp.buf.definition()
 end)
 
+
+
+
 -- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 keymap.set("n", "K", function()
   vim.lsp.buf.hover()
@@ -129,12 +132,11 @@ map("n", "<leader>aw", function()
 end)
 
 -- buffer diagnostics only
--- keymap.set("n", "<leader>D", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
--- keymap.set("n", "<leader>d", "<cmd>Lspsaga show_cursor_diagnostics<CR>", opts) -- show diagnostics for cursor
-map("n", "<leader>d", function()
-  vim.diagnostic.setloclist()
-end)
-
+keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
+-- map("n", "<leader>d", function()
+--   vim.diagnostic.setloclist()
+-- end)
+--
 map("n", "[c", function()
   vim.diagnostic.goto_prev({ wrap = false })
 end)
@@ -142,3 +144,28 @@ end)
 map("n", "]c", function()
   vim.diagnostic.goto_next({ wrap = false })
 end)
+
+-- Example mappings for usage with nvim-dap. If you don't use that, you can
+-- skip these
+vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+    vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
+    vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
+    vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
+    vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
+    vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
+    vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
+    vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
+    vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
+      require('dap.ui.widgets').hover()
+    end)
+    vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
+      require('dap.ui.widgets').preview()
+    end)
+    vim.keymap.set('n', '<Leader>df', function()
+      local widgets = require('dap.ui.widgets')
+      widgets.centered_float(widgets.frames)
+    end)
+    vim.keymap.set('n', '<Leader>ds', function()
+      local widgets = require('dap.ui.widgets')
+      widgets.centered_float(widgets.scopes)
+  end)
