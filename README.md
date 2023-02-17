@@ -14,7 +14,7 @@ These should all be installed by my install script, but just in case:
 
 - [RIPGREP](https://github.com/BurntSushi/ripgrep)
 - [Coursier](https://get-coursier.io/docs/cli-installation) - For scala LSP (Metals)
-- [NVM](curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash) - Used to install node versions.
+- [NVM](https://github.com/nvm-sh/nvm) - Used to install node versions.
 - [SDKMAN](https://sdkman.io/install) - Used to manage JVM, SBT, and Scala versions.
 
 ## Install
