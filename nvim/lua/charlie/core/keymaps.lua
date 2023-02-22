@@ -34,7 +34,8 @@ keymap.set("n", "<leader>tx", ":tabclose  <CR>") -- close current tab
 keymap.set("n", "<leader>tn", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>tp", ":tabp<CR>") --  go to previous tab
 
-
+keymap.set("n", "<C-d>", "<C-d>zz")
+keymap.set("n", "<C-u>", "<C-u>zz")
 ----------------------
 -- Plugin Keybinds
 ----------------------
@@ -51,18 +52,20 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in 
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
-
 keymap.set("n", "<Leader>fr", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
+keymap.set("n", "<leader>mc", require("telescope").extensions.metals.commands)
+local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fp', builtin.commands, {})
+vim.keymap.set('n', '<leader>fgr', builtin.lsp_references, {})
+vim.keymap.set('n', '<leader>fws', builtin.lsp_dynamic_workspace_symbols, {})
+vim.keymap.set('n', '<leader>fi', builtin.lsp_implementations, {})
+vim.keymap.set('n', '<leader>fd', builtin.lsp_definitions, {})
 
 
-keymap.set("n", "<Leader>i", ":MetalsOrganizeImports")
-
+keymap.set("n", "<Leader>i", ":MetalsOrganizeImports<CR>")
 keymap.set("n", "gD", function()
   vim.lsp.buf.definition()
 end)
-
-
-
 
 -- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 keymap.set("n", "K", function()
