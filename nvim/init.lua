@@ -13,3 +13,5 @@ require("charlie.plugins.autopairs")
 require("charlie.plugins.treesitter")
 require("charlie.plugins.git")
 
+
+

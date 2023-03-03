@@ -12,3 +12,5 @@ if not status then
   print("Colorscheme not found!") -- print error if colorscheme not installed
   return
 end
+require("transparent").setup({})
+vim.g.tokyonight_transparent = vim.g.transparent_enabled

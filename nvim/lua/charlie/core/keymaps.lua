@@ -24,8 +24,8 @@ keymap.set("n", "<leader>+", "<C-a>") -- increment
 keymap.set("n", "<leader>-", "<C-x>") -- decrement
 
 -- window management
-keymap.set("n", "<leader>s-", "<C-w>v") -- split window vertically
-keymap.set("n", "<leader>s|", "<C-w>s") -- split window horizontally
+keymap.set("n", "<leader>s|", "<C-w>v") -- split window vertically
+keymap.set("n", "<leader>s-", "<C-w>s") -- split window horizontally
 keymap.set("n", "<leader>se", "<C-w>=") -- make split windows equal width & height
 keymap.set("n", "<leader>sx", ":close<CR>") -- close current split window
 
