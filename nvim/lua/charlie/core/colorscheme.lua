@@ -14,3 +14,4 @@ if not status then
 end
 require("transparent").setup({})
 vim.g.tokyonight_transparent = vim.g.transparent_enabled
+vim.cmd[[hi NvimTreeNormal guibg=NONE ctermbg=NONE]]

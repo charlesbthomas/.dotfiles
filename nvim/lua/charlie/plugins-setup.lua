@@ -13,7 +13,7 @@ local packer_bootstrap = ensure_packer() -- true if packer was just installed
 
 -- autocommand that reloads neovim and installs/updates/removes plugins
 -- when file is saved
-vim.cmd([[ 
+vim.cmd([[
   augroup packer_user_config
     autocmd!
     autocmd BufWritePost plugins-setup.lua source <afile> | PackerSync
@@ -35,11 +35,24 @@ return packer.startup(function(use)
   -- use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
   use 'folke/tokyonight.nvim'
   use 'xiyaowong/nvim-transparent'
+  use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        window = {
+          width = 120
+        }
+      }
+    end
+  }
 
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
   -- essential plugins
-  use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+  use("tpope/vim-surround")               -- add, delete, change surroundings (it's awesome)
   use("inkarkat/vim-ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
 
   -- commenting with gc
@@ -56,32 +69,41 @@ return packer.startup(function(use)
 
   -- fuzzy finding w/ telescope
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
-  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" }) -- fuzzy finder
+  use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })        -- fuzzy finder
 
   -- autocompletion
   use("hrsh7th/cmp-vsnip")
   use("hrsh7th/vim-vsnip")
-  use("hrsh7th/nvim-cmp") -- completion plugin
-  use("hrsh7th/cmp-buffer") -- source for text in buffer
-  use("hrsh7th/cmp-path") -- source for file system paths
+  use("hrsh7th/nvim-cmp")      -- completion plugin
+  use("hrsh7th/cmp-buffer")    -- source for text in buffer
+  use("hrsh7th/cmp-path")      -- source for file system paths
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
-  
+
   -- lsp server stuff
   use("hrsh7th/cmp-nvim-lsp")
   use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
-  use("onsails/lspkind.nvim") -- vs-code like icons for autocompletion
-
-  -- snippets
-  use("L3MON4D3/LuaSnip") -- snippet engine
-  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-  use("rafamadriz/friendly-snippets") -- useful snippets
-
+  use("onsails/lspkind.nvim")                      -- vs-code like icons for autocompletion
+  use({
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+  })
   -- scala metals
-  use({'scalameta/nvim-metals', requires = { 
+  use({
+    'scalameta/nvim-metals',
+    requires = {
       "nvim-lua/plenary.nvim",
-      "mfussenegger/nvim-dap" 
+      "mfussenegger/nvim-dap"
     }
   })
+  -- Rust tools
+  use 'simrat39/rust-tools.nvim'
+  use({ "jose-elias-alvarez/null-ls.nvim" })
+
+  -- snippets
+  use("L3MON4D3/LuaSnip")             -- snippet engine
+  use("saadparwaiz1/cmp_luasnip")     -- for autocompletion
+  use("rafamadriz/friendly-snippets") -- useful snippets
 
   -- treesitter configuration
   use({

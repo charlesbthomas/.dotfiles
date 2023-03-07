@@ -9,9 +9,10 @@ require("charlie.plugins.telescope")
 require("charlie.plugins.nvim-cmp")
 require("charlie.plugins.lsp.lspsaga")
 require("charlie.plugins.metals")
+require("charlie.plugins.lsp.mason")
+require("charlie.plugins.lsp.config")
+require("charlie.plugins.lsp.null_ls")
 require("charlie.plugins.autopairs")
 require("charlie.plugins.treesitter")
 require("charlie.plugins.git")
-
-
 
