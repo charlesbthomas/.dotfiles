@@ -31,6 +31,20 @@ dap.configurations.scala = {
       runType = "testTarget",
     },
   },
+  {
+    type = "scala",
+    request = "attach",
+    name = "Remote Attach (port 5005)",
+    hostName = "localhost",
+    port = 5005
+  },
+  {
+    type = "scala",
+    request = "attach",
+    name = "Remote Attach (port 5006)",
+    hostName = "localhost",
+    port = 5006
+  }
 }
 
 metals_config.on_attach = function(client, bufnr)

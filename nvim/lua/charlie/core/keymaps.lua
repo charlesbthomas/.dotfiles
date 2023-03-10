@@ -173,8 +173,31 @@ vim.keymap.set('n', '<Leader>ds', function()
   widgets.centered_float(widgets.scopes)
 end)
 
-
-
 vim.keymap.set("n", "<leader>zz", function()
   require("zen-mode").toggle()
+end)
+
+vim.keymap.set("n", "<leader>tt", function()
+  require("transparent").toggle_transparent()
+end)
+
+local harpoon_mark = require("harpoon.mark")
+remap("n", "<leader>ha", function()
+  harpoon_mark.add_file()
+end)
+
+local harpoon_ui = require("harpoon.ui")
+remap("n", "<leader>ht", function()
+  harpoon_ui.toggle_quick_menu()
+end)
+remap("n", "<leader>hn", function()
+  harpoon_ui.nav_next()
+end)
+remap("n", "<leader>hp", function()
+  harpoon_ui.nav_prev()
+end)
+
+local harpoon_term = require("harpoon.term")
+remap("n", "<leader>hr", function()
+  harpoon_term.gotoTerminal(1)
 end)

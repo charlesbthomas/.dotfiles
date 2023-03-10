@@ -70,6 +70,7 @@ return packer.startup(function(use)
   -- fuzzy finding w/ telescope
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })        -- fuzzy finder
+  use 'ThePrimeagen/harpoon' -- jump to files in a project
 
   -- autocompletion
   use("hrsh7th/cmp-vsnip")
