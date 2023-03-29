@@ -13,7 +13,7 @@ if not status then
   return
 end
 require("transparent").setup({
-  enable = true,
+  enable = false,
   transparent = true,
 })
 vim.g.tokyonight_transparent = vim.g.transparent_enabled

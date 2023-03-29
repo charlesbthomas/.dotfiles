@@ -9,7 +9,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 nvimtree.setup({
   view = {
-    width = 40,
+    width = 60,
   },
   renderer = {
     group_empty = true,
@@ -25,7 +25,6 @@ nvimtree.setup({
   update_focused_file = {
     enable = true
   },
-
   actions = {
     open_file = {
       window_picker = {
@@ -33,7 +32,7 @@ nvimtree.setup({
       },
     },
   },
-  -- 	git = {
-  -- 		ignore = false,
-  -- 	},
+  git = {
+    ignore = false,
+  }
 })
