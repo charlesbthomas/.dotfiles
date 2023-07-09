@@ -14,11 +14,33 @@ local disable_builtin_lsp_formatter = function(client)
 end
 
 require("rust-tools").setup({
-  })
+  server  = {
+    on_attach = function(client, bufnr)
+      -- Hover actions
+      -- vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+
+      -- Code action groups
+      -- vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+      require 'illuminate'.on_attach(client)
+    end,
+    settings = {
+      ['rust-analyzer'] = {
+        checkOnSave = {
+          command = "clippy"
+        }
+      }
+    }
+  }
+})
 
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 lspconfig.jsonls.setup {
+  capabilities = capabilities,
+  on_attach = disable_builtin_lsp_formatter,
+}
+
+lspconfig.pyright.setup {
   capabilities = capabilities,
   on_attach = disable_builtin_lsp_formatter,
 }
@@ -75,7 +97,7 @@ lspconfig.yamlls.setup {
 }
 
 -- These server just use the vanilla setup
-local servers = { "bashls", "dockerls", "html", "cssls", "tailwindcss", "pyright", "gopls" }
+local servers = { "bashls", "dockerls", "html", "cssls", "tailwindcss", "gopls" }
 for _, server in pairs(servers) do
   lspconfig[server].setup({ capabilities = capabilities })
 end

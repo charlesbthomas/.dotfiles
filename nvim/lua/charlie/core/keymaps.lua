@@ -106,7 +106,7 @@ remap("n", "<leader>rn", function()
 end)
 
 remap("n", "<leader>f", function()
-  vim.lsp.buf.formatting()
+  vim.lsp.buf.format()
 end)
 
 

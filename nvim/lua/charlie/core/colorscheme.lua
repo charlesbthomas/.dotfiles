@@ -13,7 +13,10 @@ if not status then
   return
 end
 require("transparent").setup({
-  enable = false,
+  -- enable = false,
   transparent = true,
+  extra_groups = {
+    "NvimTreeNormal"
+  }
 })
 vim.g.tokyonight_transparent = vim.g.transparent_enabled

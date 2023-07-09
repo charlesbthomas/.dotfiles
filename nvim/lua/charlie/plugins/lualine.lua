@@ -9,15 +9,16 @@ lualine.setup({
     theme = 'tokyonight',
     component_separators = '|',
     section_separators = { left = '', right = '' },
+    globalstatus = true
   },
   sections = {
     lualine_a = {
       { 'mode', separator= {left=' '},right_padding = 2 },
     },
-    lualine_b = { 'filename', 'branch' },
+    lualine_b = { 'filename' },
     lualine_c = {},
     lualine_x = {},
-    lualine_y = { 'filetype', 'progress' },
+    lualine_y = { 'branch' },
     lualine_z = {
       { 'location', separator = { right = ' ' }, left_padding = 2 },
     },
