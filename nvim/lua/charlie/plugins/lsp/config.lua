@@ -61,6 +61,12 @@ lspconfig.lua_ls.setup({
   },
 })
 
+lspconfig.volar.setup {
+  filetypes = { "vue" },
+  capabilities = capabilities,
+  on_attach = disable_builtin_lsp_formatter,
+}
+
 lspconfig.yamlls.setup {
   capabilities = capabilities,
   filetypes = { "yaml", "yml" },

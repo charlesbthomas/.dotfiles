@@ -35,7 +35,8 @@ mason_lspconfig.setup({
     "tsserver",
     "yamlls",
     "pyright",
-    "gopls"
+    "gopls",
+    "vue-language-server",
   },
 })
 

@@ -81,7 +81,7 @@ remap("n", "gi", function()
   vim.lsp.buf.implementation()
 end)
 
-remap("n", "gr", function()
+remap("n", "gf", function()
   vim.lsp.buf.references()
 end)
 
