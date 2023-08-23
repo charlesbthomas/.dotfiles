@@ -34,6 +34,8 @@ return packer.startup(function(use)
 
   -- use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
   use 'folke/tokyonight.nvim'
+  use 'Mofiqul/dracula.nvim'
+
   use 'xiyaowong/nvim-transparent'
   use {
     "folke/zen-mode.nvim",
@@ -48,6 +50,22 @@ return packer.startup(function(use)
       }
     end
   }
+
+  use({
+    "epwalsh/obsidian.nvim",
+    requires = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    config = function()
+      require("obsidian").setup({
+        dir = "~/ws/notes/notes",
+        -- see below for full list of options 👇
+      })
+    end,
+  })
 
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
@@ -70,7 +88,7 @@ return packer.startup(function(use)
   -- fuzzy finding w/ telescope
   use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- dependency for better sorting performance
   use({ "nvim-telescope/telescope.nvim", branch = "0.1.x" })        -- fuzzy finder
-  use 'ThePrimeagen/harpoon' -- jump to files in a project
+  use 'ThePrimeagen/harpoon'                                        -- jump to files in a project
 
   -- autocompletion
   use("hrsh7th/cmp-vsnip")
@@ -79,6 +97,7 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-buffer")    -- source for text in buffer
   use("hrsh7th/cmp-path")      -- source for file system paths
   use("windwp/nvim-autopairs") -- autoclose parens, brackets, quotes, etc...
+  use("windwp/nvim-ts-autotag")
 
   -- lsp server stuff
   use("hrsh7th/cmp-nvim-lsp")
