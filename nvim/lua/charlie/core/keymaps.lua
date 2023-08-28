@@ -67,6 +67,9 @@ keymap.set("n", "gD", function()
   vim.lsp.buf.definition()
 end)
 
+keymap.set("n", "<leader>wtf", ":Wtf<CR>")       --  go to previous tab
+
+
 -- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
 keymap.set("n", "K", function()
   vim.lsp.buf.hover()

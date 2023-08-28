@@ -2,6 +2,7 @@
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
     vim.cmd([[packadd packer.nvim]])
@@ -108,6 +109,30 @@ return packer.startup(function(use)
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   })
+
+  -- AI Tools
+  use("github/copilot.vim")
+  use({
+    "piersolenski/wtf.nvim",
+    config = function()
+      require("wtf").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+    }
+  })
+  use({
+    "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup()
+    end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  })
+
   -- scala metals
   use({
     'scalameta/nvim-metals',
@@ -136,7 +161,6 @@ return packer.startup(function(use)
 
   -- git
   use("lewis6991/gitsigns.nvim") -- show line modifications on left hand side
-  use("github/copilot.vim")
 
   if packer_bootstrap then
     require("packer").sync()
