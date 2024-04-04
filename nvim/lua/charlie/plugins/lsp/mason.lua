@@ -14,8 +14,6 @@ if not has_mason_lspconfig then
   return
 end
 
-
-
 local mason_null_ls_status, mason_null_ls = pcall(require, "mason-null-ls")
 if not mason_null_ls_status then
   return
@@ -25,7 +23,7 @@ mason_lspconfig.setup({
   automatic_installation = true,
   ensure_installed = {
     "bashls",
-    "cssls",
+    "css-lsp",
     "tailwindcss",
     "dockerls",
     "eslint",
@@ -33,7 +31,7 @@ mason_lspconfig.setup({
     "html",
     "jsonls",
     "tsserver",
-    "yamlls",
+    "yaml-language-server",
     "pyright",
     "gopls",
     "vue-language-server",

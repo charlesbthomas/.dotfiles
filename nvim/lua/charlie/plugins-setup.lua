@@ -36,6 +36,7 @@ return packer.startup(function(use)
   -- use("bluz71/vim-nightfly-guicolors") -- preferred colorscheme
   use 'folke/tokyonight.nvim'
   use 'Mofiqul/dracula.nvim'
+  use 'catppuccin/nvim'
 
   use 'xiyaowong/nvim-transparent'
   use {
@@ -52,22 +53,6 @@ return packer.startup(function(use)
     end
   }
 
-  use({
-    "epwalsh/obsidian.nvim",
-    requires = {
-      -- Required.
-      "nvim-lua/plenary.nvim",
-
-      -- see below for full list of optional dependencies 👇
-    },
-    config = function()
-      require("obsidian").setup({
-        dir = "~/ws/notes/notes",
-        -- see below for full list of options 👇
-      })
-    end,
-  })
-
   use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
 
   -- essential plugins
@@ -79,6 +64,33 @@ return packer.startup(function(use)
 
   -- file explorer
   use("nvim-tree/nvim-tree.lua")
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+    },
+    config = function()
+      require('neo-tree').setup({
+        popup_border_style = 'rounded',
+        sources = {
+          "filesystem",
+          "buffers",
+        },
+        filesystem = {
+          filtered_items = {
+            visible = true,
+            hide_gitignored = false,
+            hide_hidden = false,
+            hide_dotfiles = false,
+          },
+          follow_current_file = true,
+        }
+      })
+    end
+  }
 
   -- icons
   use("nvim-tree/nvim-web-devicons")
@@ -133,6 +145,75 @@ return packer.startup(function(use)
     }
   })
 
+  -- use {
+  --   'echasnovski/mini.indentscope',
+  --   config = function()
+  --     require("mini.indentscope").setup({
+  --       symbol = "│",
+  --       options = { try_as_border = true },
+  --     })
+  --   end
+  -- }
+  use({
+    "rcarriga/nvim-notify",
+    config = function()
+      require("notify").setup({
+        -- Animation style (see below for details)
+        stages = "fade_in_slide_out",
+
+        -- Default timeout for notifications
+        timeout = 500,
+
+        -- For stages that change opacity this is treated as the highlight behind the window
+        background_colour = "#000000",
+        max_height = function()
+          return math.floor(vim.o.lines * 0.75)
+        end,
+        max_width = function()
+          return math.floor(vim.o.columns * 0.50)
+        end,
+
+        -- Icons for the different levels
+        icons = {
+          ERROR = "",
+          WARN = "",
+          INFO = "",
+          DEBUG = "",
+          TRACE = "✎",
+        },
+      })
+    end
+  })
+
+  use({
+    "folke/noice.nvim",
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify"
+    },
+    config = function()
+      require("noice").setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true,         -- use a classic bottom cmdline for search
+          command_palette = true,       -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
+        },
+        timeoutlen = 1000,              -- time to wait for a mapping to complete in milliseconds
+      })
+    end
+  })
+
   -- scala metals
   use({
     'scalameta/nvim-metals',
@@ -143,7 +224,7 @@ return packer.startup(function(use)
   })
   -- Rust tools
   use 'simrat39/rust-tools.nvim'
-  use({ "jose-elias-alvarez/null-ls.nvim" })
+  use({ "nvimtools/none-ls.nvim" })
 
   -- snippets
   use("L3MON4D3/LuaSnip")             -- snippet engine

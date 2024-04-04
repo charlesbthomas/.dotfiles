@@ -8,6 +8,9 @@ saga.setup({
   lightbulb = {
     enable = false
   },
+  code_action = {
+    extend_gitsigns = true
+  }
   -- symbol_in_winbar = {
   --   enable = true,
   --   separator = " > ",

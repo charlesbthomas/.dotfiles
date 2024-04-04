@@ -3,7 +3,7 @@
 -- Middleman between Neovim's builtin LSP and formatters, linters, or other
 -- utilities.
 ---------------------------------------------------------------------------
-local has_null_ls, null_ls = pcall(require, "null-ls")
+local has_null_ls, null_ls = pcall(require, "none-ls")
 if not has_null_ls then
   return
 end
@@ -21,10 +21,8 @@ null_ls.setup({
     code_actions.gitsigns,
     completion.spell,
     diagnostics.eslint_d.with({
-      -- js/ts linter
-      -- only enable eslint if root has .eslintrc.js (not in youtube nvim video)
       condition = function(utils)
-        return utils.root_has_file(".eslintrc.js") -- change file extension if you use something else
+        return utils.root_has_file(".eslintrc.js", ".eslintrc.json", ".eslintrc.cjs")
       end,
     }),
     formatting.prettier,

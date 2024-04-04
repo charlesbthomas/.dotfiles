@@ -44,17 +44,17 @@ keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>") -- toggle split window maximization
 
 -- nvim-tree
-keymap.set("n", "<leader>e", ":NvimTreeToggle<CR>") -- toggle file explorer
+keymap.set("n", "<leader>e", ":Neotree toggle=true<CR>") -- toggle file explorer
 
 -- telescope
 keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>")  -- find files within current working directory, respects .gitignore
-keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>")   -- find string in current working directory as you type
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>")     -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")   -- list available help tags
 keymap.set("n", "<Leader>fr", ":Telescope oldfiles<CR>", { noremap = true, silent = true })
 keymap.set("n", "<leader>mc", require("telescope").extensions.metals.commands)
 local builtin = require('telescope.builtin')
+keymap.set("n", "<leader>fs", builtin.live_grep)   -- find string in current working directory as you type
 keymap.set('n', '<leader>fp', builtin.commands, {})
 keymap.set('n', '<leader>fgr', builtin.lsp_references, {})
 keymap.set('n', '<leader>fws', builtin.lsp_dynamic_workspace_symbols, {})
@@ -70,10 +70,10 @@ end)
 keymap.set("n", "<leader>wtf", ":Wtf<CR>")       --  go to previous tab
 
 
--- keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-keymap.set("n", "K", function()
-  vim.lsp.buf.hover()
-end)
+keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
+-- keymap.set("n", "K", function()
+--   vim.lsp.buf.hover()
+-- end)
 
 local remap = keymap.set
 local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -109,7 +109,7 @@ remap("n", "<leader>rn", function()
 end)
 
 remap("n", "<leader>f", function()
-  vim.lsp.buf.format()
+  vim.lsp.buf.format { timeout = 5000 }
 end)
 
 
@@ -139,7 +139,7 @@ end)
 
 -- buffer diagnostics only
 keymap.set("n", "<leader>d", "<cmd>Lspsaga show_line_diagnostics<CR>", opts) -- show  diagnostics for line
--- map("n", "<leader>d", function()
+-- remap("n", "<leader>d", function()
 --   vim.diagnostic.setloclist()
 -- end)
 --

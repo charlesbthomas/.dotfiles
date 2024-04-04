@@ -103,7 +103,7 @@ lspconfig.yamlls.setup {
 }
 
 -- These server just use the vanilla setup
-local servers = { "bashls", "dockerls", "html", "cssls", "tailwindcss", "gopls" }
+local servers = { "bashls", "dockerls", "html", "css-lsp", "tailwindcss", "gopls" }
 for _, server in pairs(servers) do
   lspconfig[server].setup({ capabilities = capabilities })
 end
