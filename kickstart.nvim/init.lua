@@ -56,6 +56,9 @@ vim.opt.scrolloff = 10
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
+
 local keymap = vim.keymap -- for conciseness
 vim.keymap.set('n', '<C-s>', ':w<cr>')
 vim.keymap.set('i', 'jk', '<ESC>')
