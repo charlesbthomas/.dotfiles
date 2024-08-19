@@ -9,14 +9,14 @@
 -- set colorscheme to tokyonight with protected call
 local status, _ = pcall(vim.cmd, "colorscheme dracula")
 if not status then
-  print("Colorscheme not found!") -- print error if colorscheme not installed
-  return
+	print("Colorscheme not found!") -- print error if colorscheme not installed
+	return
 end
 require("transparent").setup({
-  -- enable = false,
-  transparent = true,
-  extra_groups = {
-    "NvimTreeNormal"
-  }
+	-- enable = false,
+	transparent = false,
+	extra_groups = {
+		"NvimTreeNormal",
+	},
 })
 vim.g.tokyonight_transparent = vim.g.transparent_enabled

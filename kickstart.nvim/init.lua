@@ -68,6 +68,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>ae', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, { desc = 'Manually format current buffer' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -521,14 +522,14 @@ require('lazy').setup({
     'stevearc/conform.nvim',
     lazy = false,
     keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
+      -- {
+      --   '<leader>f',
+      --   function()
+      --     require('conform').format { async = true, lsp_fallback = true }
+      --   end,
+      --   mode = '',
+      --   desc = '[F]ormat buffer',
+      -- },
     },
     opts = {
       notify_on_error = false,
@@ -638,6 +639,14 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
       -- Load the colorscheme here.
+
+      require('tokyonight').setup {
+        transparent = true,
+        styles = {
+          sidebars = 'transparent',
+          floats = 'transparent',
+        },
+      }
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
