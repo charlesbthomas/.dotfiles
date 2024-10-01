@@ -38,8 +38,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -79,10 +79,10 @@ vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, { desc = 'Manually format 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -460,10 +460,10 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
+        clangd = {},
+        gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -633,7 +633,15 @@ require('lazy').setup({
       }
     end,
   },
-
+  -- {
+  --   'ellisonleao/gruvbox.nvim',
+  --   priority = 1000,
+  --   config = true,
+  --   init = function()
+  --     vim.cmd.colorscheme 'gruvbox'
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
   {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -641,15 +649,15 @@ require('lazy').setup({
       -- Load the colorscheme here.
 
       require('tokyonight').setup {
-        transparent = true,
-        styles = {
-          sidebars = 'transparent',
-          floats = 'transparent',
-        },
+        -- transparent = true,
+        -- styles = {
+        --   sidebars = 'transparent',
+        --   floats = 'transparent',
+        -- },
       }
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      vim.cmd.colorscheme 'tokyonight'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
