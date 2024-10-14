@@ -9,11 +9,12 @@ return {
   },
   config = function()
     vim.keymap.set('n', '<leader>e', '<cmd>:Neotree toggle<CR>')
+    vim.keymap.set('n', '<leader>t', '<cmd>:Neotree current toggle<CR>')
     require('neo-tree').setup {
       filesystem = {
         follow_current_file = {
           enabled = true,
-          leave_dirs_open = true,
+          leave_dirs_open = false,
         },
         window = {
           mappings = {

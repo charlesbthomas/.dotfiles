@@ -51,6 +51,12 @@ return {
     vim.keymap.set('n', '<F2>', dap.step_over, { desc = 'Debug: Step Over' })
     vim.keymap.set('n', '<F3>', dap.step_out, { desc = 'Debug: Step Out' })
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
+    vim.keymap.set('n', '<Leader>dr', function()
+      require('dap').repl.open()
+    end)
+    vim.keymap.set({ 'n', 'v' }, '<Leader>dp', function()
+      require('dap.ui.widgets').preview()
+    end)
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint' })
@@ -83,6 +89,27 @@ return {
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
+
+    -- scala
+    dap.configurations.scala = {
+      {
+        type = 'scala',
+        request = 'launch',
+        name = 'RunOrTest',
+        metals = {
+          runType = 'runOrTestFile',
+          --args = { "firstArg", "secondArg", "thirdArg" }, -- here just as an example
+        },
+      },
+      {
+        type = 'scala',
+        request = 'launch',
+        name = 'Test Target',
+        metals = {
+          runType = 'testTarget',
+        },
+      },
+    }
 
     -- Install golang specific config
     require('dap-go').setup()

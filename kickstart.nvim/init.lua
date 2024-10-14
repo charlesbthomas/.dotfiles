@@ -79,10 +79,10 @@ vim.keymap.set('n', '<leader>fm', vim.lsp.buf.format, { desc = 'Manually format 
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -297,6 +297,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>fs', builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      vim.keymap.set('n', '<leader>fe', function()
+        builtin.diagnostics { severity = 'ERROR' }
+      end, { desc = '[S]earch Diagnostics [E]rrors' })
+      vim.keymap.set('n', '<leader>fn', function()
+        builtin.diagnostics { severity = 'WARN' }
+      end, { desc = '[S]earch Diagnostics Warni[N]gs' })
       vim.keymap.set('n', '<leader>fr', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
       vim.keymap.set('n', '<leader>fp', builtin.commands)
@@ -416,6 +422,7 @@ require('lazy').setup({
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
           map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>cl', vim.lsp.codelens.run, '[C]ode [L]ens')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -464,13 +471,14 @@ require('lazy').setup({
         gopls = {},
         -- pyright = {},
         rust_analyzer = {},
+        jsonlint = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`tsserver`) will work just fine
-        tsserver = {},
+        -- tsserver = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes = { ...},
@@ -633,36 +641,46 @@ require('lazy').setup({
       }
     end,
   },
-  -- {
-  --   'ellisonleao/gruvbox.nvim',
-  --   priority = 1000,
-  --   config = true,
-  --   init = function()
-  --     vim.cmd.colorscheme 'gruvbox'
-  --     vim.cmd.hi 'Comment gui=none'
-  --   end,
-  -- },
   {
-    'folke/tokyonight.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000,
+    config = true,
     init = function()
-      -- Load the colorscheme here.
-
-      require('tokyonight').setup {
-        -- transparent = true,
-        -- styles = {
-        --   sidebars = 'transparent',
-        --   floats = 'transparent',
-        -- },
-      }
-      -- Like many other themes, this one has different styles, and you could load
-      -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight'
-
-      -- You can configure highlights by doing something like:
+      vim.cmd.colorscheme 'gruvbox'
       vim.cmd.hi 'Comment gui=none'
     end,
   },
+  -- {
+  --   'folke/tokyonight.nvim',
+  --   priority = 1000, -- Make sure to load this before all the other start plugins.
+  --   init = function()
+  --     -- Load the colorscheme here.
+  --
+  --     -- require('tokyonight').setup {
+  --     --   transparent = true,
+  --     --   styles = {
+  --     --     sidebars = 'transparent',
+  --     --     floats = 'transparent',
+  --     --   },
+  --     -- }
+  --     -- Like many other themes, this one has different styles, and you could load
+  --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+  --     vim.cmd.colorscheme 'tokyonight-storm'
+  --
+  --     -- You can configure highlights by doing something like:
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
+  -- {
+  --   'rose-pine/neovim',
+  --   name = 'rose-pine',
+  --   priority = 1000,
+  --   config = true,
+  --   init = function()
+  --     vim.cmd.colorscheme 'rose-pine'
+  --     vim.cmd.hi 'Comment gui=none'
+  --   end,
+  -- },
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -743,8 +761,8 @@ require('lazy').setup({
   --
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug',
+
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
 
