@@ -109,6 +109,13 @@ return {
           runType = 'testTarget',
         },
       },
+      {
+        type = 'scala',
+        request = 'attach',
+        name = 'Remote Attach (port 5005)',
+        hostName = 'localhost',
+        port = 5005,
+      },
     }
 
     -- Install golang specific config

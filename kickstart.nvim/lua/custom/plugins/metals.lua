@@ -11,9 +11,17 @@ return {
     end
 
     metals_config.settings = {
+      serverVersion = '1.4.2',
       showImplicitArguments = true,
       excludedPackages = { 'akka.actor.typed.javadsl', 'com.github.swagger.akka.javadsl' },
       testUserInterface = 'Test Explorer',
+      javaHome = '/Users/charlie/.sdkman/candidates/java/11.0.24-amzn/',
+      -- javaHome = '/Users/charlie/.sdkman/candidates/java/21.0.5-amzn',
+      bloopJvmProperties = {
+        '-Xmx16G',
+        '-XX:+UseZGC',
+        '-Xss4m',
+      },
     }
 
     return metals_config
